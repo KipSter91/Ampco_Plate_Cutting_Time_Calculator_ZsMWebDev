@@ -1,6 +1,6 @@
 /* Default styles for larger screens */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial';
   background-color: #f0f0f0;
   margin: 0;
   display: flex;
@@ -21,6 +21,33 @@ body::before {
     background-position: center;
     z-index: -1;
     filter: grayscale(90%); /* Apply grayscale effect */
+}
+
+/* Szebbé tett file input gomb */
+.custom-file-input {
+  border: 2px solid #ccc;
+  padding: 10px;
+  display: inline-block;
+  cursor: pointer;
+  background-color: #fff;
+  color: #333;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.custom-file-input:hover {
+  background-color: #ddd;
+}
+
+/* Szépítjük a horizontális vonalat */
+hr {
+  border: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+/* Kezdetben elrejtjük ezeket az elemeket */
+#resultSection, #extractedDataSection {
+  display: none;
 }
 
 .container {
@@ -45,7 +72,7 @@ input {
 }
 
 button {
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 10px 20px;
   font-size: 18px;
   background-color: #f59b00;

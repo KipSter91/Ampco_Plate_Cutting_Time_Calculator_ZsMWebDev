@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <title>Plate cutting calcualtor</title>
   </head>
   <body>
@@ -123,8 +123,23 @@
         <button type="button" onclick="resetForm()">Reset</button>
       </form>
 
-      <h3>Results:</h3>
+      <h4 id="resultSection">Results:</h4>
       <div id="result"></div>
+      <hr />
+      <h5>Upload a PDF to extract data</h5>
+      <form id="pdfForm">
+        <label class="custom-file-input" for="pdfFile">Choose a PDF</label>
+        <input
+          type="file"
+          id="pdfFile"
+          accept="application/pdf"
+          style="display: none"
+        />
+        <button type="button" onclick="uploadPDF()">Upload PDF</button>
+      </form>
+
+      <h4 id="extractedDataSection">Extracted Data:</h4>
+      <div id="result1"></div>
     </div>
     <footer id="footer">
       Copyright &copy;<span id="copyright-year"></span>
