@@ -1,8 +1,8 @@
-import { resetForm, addNewRow } from './uiUtils.js';
+import { resetForm, resetPdfForm, addNewRow } from './uiUtils.js';
 import { calculateCuttingTime } from './cuttingTimeManager.js';
 import { uploadPDF } from './pdfHandler.js';
 import { getDataFromUI } from './uiUtils.js';
-import { displayResultsInUI} from './uiUtils.js';
+import { displayResultsInUI } from './uiUtils.js';
 
 
 
@@ -20,8 +20,10 @@ window.onload = function () {
 //Buttons from the UI
 const newRowBtn = document.getElementById('addNewRowBtn');
 const calculateCuttingTimeBtn = document.getElementById('calculateCuttingTimeBtn');
-const resetFormBtn = document.getElementById('resetFormBtn');
+const resetUiBtn = document.getElementById('resetUiBtn');
 const uploadPDFBtn = document.getElementById('uploadPDFBtn');
+const choosePdfBtn = document.getElementById('choosePdfBtn');
+const resetPdfBtn = document.getElementById('resetPdfBtn');
 
 
 //Events for the buttons
@@ -31,16 +33,25 @@ newRowBtn.addEventListener('click', (event) => {
 });
 calculateCuttingTimeBtn.addEventListener('click', (event) => {
   event.preventDefault();
+  document.getElementById('result').innerHTML = ""; 
   displayResultsInUI(calculateCuttingTime(getDataFromUI()), 'resultSectionFromUi', 'result');
 
 });
-resetFormBtn.addEventListener('click', (event) => {
+resetUiBtn.addEventListener('click', (event) => {
   event.preventDefault();
   resetForm();
+});
+choosePdfBtn.addEventListener('click', (event) => {
+  event.preventDefault();
+  document.getElementById('pdfFile').click();
 });
 uploadPDFBtn.addEventListener('click', (event) => {
   event.preventDefault();
   uploadPDF();
+});
+resetPdfBtn.addEventListener('click', (event) => {
+  event.preventDefault();
+  resetPdfForm();
 });
 
 

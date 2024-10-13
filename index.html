@@ -7,9 +7,6 @@
     <title>Plate cutting calcualtor</title>
   </head>
   <body>
-    <!-- <video id="background-video" autoplay loop muted>
-      <source src="background.mp4" type="video/mp4" />
-    </video> -->
     <div class="container">
       <div class="logo">
         <svg
@@ -112,30 +109,32 @@
               <th>Z</th>
             </tr>
           </thead>
-          <tbody id="dataRows">
-            <!-- Itt jelennek meg a sorok a gomb megnyomása után -->
-          </tbody>
+          <tbody id="dataRows"></tbody>
         </table>
         <button type="button" id="addNewRowBtn">Add new row</button>
         <button type="button" id="calculateCuttingTimeBtn">Calculate</button>
-        <button type="button" id="resetFormBtn">Reset</button>
+        <button type="button" id="resetUiBtn">Reset</button>
       </form>
 
       <h4 id="resultSectionFromUi">Results:</h4>
       <div id="result"></div>
       <hr />
       <h5>
-        Upload an ActCube drawing (.*pdf) to extract the values of X, Y and Z and calculate the cutting times for each sequences.
+        Please upload an ActCube drawing (.*pdf) to extract the values of X, Y and Z <br>
+        and calculate the cutting times for each sequences.
       </h5>
       <form id="pdfForm">
-        <label class="custom-file-input" for="pdfFile">Choose a PDF</label>
+        <button class="custom-file-input" id="choosePdfBtn">
+          Choose PDF
+        </button>
         <input
           type="file"
           id="pdfFile"
           accept="application/pdf"
           style="display: none"
         />
-        <button type="button" id="uploadPDFBtn">Upload PDF</button>
+        <button type="button" id="uploadPDFBtn">Calculate</button>
+        <button type="button" id="resetPdfBtn">Reset</button>
       </form>
 
       <h4 id="resultSectionFromPdf">Results:</h4>

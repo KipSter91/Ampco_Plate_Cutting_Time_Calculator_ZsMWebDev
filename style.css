@@ -23,21 +23,7 @@ body::before {
     filter: grayscale(90%); /* Apply grayscale effect */
 }
 
-/* Szebbé tett file input gomb */
-.custom-file-input {
-  border: 2px solid #ccc;
-  padding: 10px;
-  display: inline-block;
-  cursor: pointer;
-  background-color: #fff;
-  color: #333;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
 
-.custom-file-input:hover {
-  background-color: #ddd;
-}
 
 /* Szépítjük a horizontális vonalat */
 hr {

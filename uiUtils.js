@@ -9,6 +9,14 @@ export function resetForm() {
 }
 
 
+//Function to reset the PDF form
+export function resetPdfForm() {
+    document.getElementById('resultSectionFromPdf').style.display = 'none';
+    document.getElementById("result1").innerHTML = "";  // Clear the result section
+    document.getElementById('pdfFile').value = "";  // Clear the file input
+}
+
+
 // Dynamically add rows to the UI
 let rowCount = 0;
 export function addNewRow() {

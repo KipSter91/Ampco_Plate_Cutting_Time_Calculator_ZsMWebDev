@@ -19,7 +19,7 @@ export async function uploadPDF() {
     if (!checkFileUpload()) {
         return;
     }
-
+    document.getElementById('result1').innerHTML = ""; 
     document.getElementById('resultSectionFromPdf').style.display = 'block';
     const pdfFile = document.getElementById('pdfFile').files[0];
     const formData = new FormData();
@@ -34,9 +34,6 @@ export async function uploadPDF() {
     // Get the JSON response from the server
     const data = await response.json();
     console.log("Extracted data:", data);
-
-    // Clear previous results before appending new ones
-    document.getElementById('result').innerHTML = '';
 
     // Process each sequence individually and track sequence number
     let sequenceNumber = 1;  // Start from 1
