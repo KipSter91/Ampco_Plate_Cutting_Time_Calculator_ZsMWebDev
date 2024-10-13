@@ -116,17 +116,17 @@
             <!-- Itt jelennek meg a sorok a gomb megnyomása után -->
           </tbody>
         </table>
-        <button type="button" onclick="addNewRow()">Add new row</button>
-        <button type="button" onclick="calculateCuttingTime()">
-          Calculate
-        </button>
-        <button type="button" onclick="resetForm()">Reset</button>
+        <button type="button" id="addNewRowBtn">Add new row</button>
+        <button type="button" id="calculateCuttingTimeBtn">Calculate</button>
+        <button type="button" id="resetFormBtn">Reset</button>
       </form>
 
       <h4 id="resultSection">Results:</h4>
       <div id="result"></div>
       <hr />
-      <h5>Upload an ActCube drawing (.*pdf) to extract the values of X, Y and Z</h5>
+      <h5>
+        Upload an ActCube drawing (.*pdf) to extract the values of X, Y and Z
+      </h5>
       <form id="pdfForm">
         <label class="custom-file-input" for="pdfFile">Choose a PDF</label>
         <input
@@ -135,7 +135,7 @@
           accept="application/pdf"
           style="display: none"
         />
-        <button type="button" onclick="uploadPDF()">Upload PDF</button>
+        <button type="button" id="uploadPDFBtn">Upload PDF</button>
       </form>
 
       <h4 id="extractedDataSection">Extracted Data:</h4>
@@ -145,6 +145,6 @@
       Copyright &copy;<span id="copyright-year"></span>
       by ZsMWebDev | Zsolt Márku
     </footer>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>
