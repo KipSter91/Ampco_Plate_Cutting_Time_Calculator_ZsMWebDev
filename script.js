@@ -1,8 +1,8 @@
-import { checkMatchingElements } from './mainAlgorithm.js';
-import { resetForm, addNewRow} from './uiUtils.js';
-import { calculateCuttingTimes } from './calcCut.js';
+import { resetForm, addNewRow } from './uiUtils.js';
 import { calculateCuttingTime } from './cuttingTimeManager.js';
 import { uploadPDF } from './pdfHandler.js';
+import { getDataFromUI } from './uiUtils.js';
+import { displayResultsInUI} from './uiUtils.js';
 
 
 
@@ -31,7 +31,8 @@ newRowBtn.addEventListener('click', (event) => {
 });
 calculateCuttingTimeBtn.addEventListener('click', (event) => {
   event.preventDefault();
-  calculateCuttingTime();
+  displayResultsInUI(calculateCuttingTime(getDataFromUI()), 'resultSectionFromUi', 'result');
+
 });
 resetFormBtn.addEventListener('click', (event) => {
   event.preventDefault();

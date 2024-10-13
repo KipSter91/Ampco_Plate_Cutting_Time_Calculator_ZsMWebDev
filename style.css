@@ -46,7 +46,7 @@ hr {
 }
 
 /* Kezdetben elrejtjük ezeket az elemeket */
-#resultSection, #extractedDataSection {
+#resultSectionFromUi, #resultSectionFromPdf {
   display: none;
 }
 

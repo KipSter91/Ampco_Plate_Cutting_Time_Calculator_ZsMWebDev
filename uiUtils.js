@@ -1,6 +1,6 @@
 // Function to reset the form and reset the row count
 export function resetForm() {
-    document.getElementById('resultSection').style.display = 'none';
+    document.getElementById('resultSectionFromUi').style.display = 'none';
     const dataRows = document.getElementById("dataRows");
     dataRows.innerHTML = "";  // Clear the table rows
     rowCount = 0;  // Reset row count
@@ -46,13 +46,33 @@ export function getDataFromUI() {
 }
 
 
-// Function to display the results in the UI
-export function displayResults(finalResult) {
-    document.getElementById('resultSection').style.display = 'block';
-    const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = ""; // Clear previous results if they exist
+// Function to generate the result strings, not tied to the UI
+export function generateResultsString(finalResult) {
+    // console.log(finalResult.updatedResultArray);
+    let resultString = "";
     finalResult.updatedResultArray.forEach(item => {
-      resultDiv.innerHTML += `Cut ${item.row}: Height = ${item.height} mm, Width = ${item.width} mm, Cutting time = ${item.cuttingTime}<br>`;
+        resultString += `Cut ${item.row}: Height = ${item.height} mm, Width = ${item.width} mm, Cutting time = ${item.cuttingTime}\n`;
     });
-    resultDiv.innerHTML += `<br><strong>Total cutting time:</strong> ${finalResult.totalCuttingTime}`;
-  }
+    resultString += `\nTotal cutting time: ${finalResult.totalCuttingTime}\n`;
+    return resultString;
+}
+
+
+// Generic function to display results in the UI (for both UI and PDF input)
+export function displayResultsInUI(finalResult, resultSectionId, resultDivId, sequenceNumber = null) {
+    const resultString = generateResultsString(finalResult);
+    document.getElementById(resultSectionId).style.display = 'block';
+    const resultDiv = document.getElementById(resultDivId);
+
+    // Add sequence number if provided
+    if (sequenceNumber !== null) {
+        resultDiv.innerHTML += `<strong>Sequence ${sequenceNumber}:</strong>`;
+        resultDiv.innerHTML += `<br><br>`;  // Add extra space after sequence number
+    }
+
+    // Append result and add extra space if sequenceNumber is provided
+    resultDiv.innerHTML += resultString.replace(/\n/g, '<br>');
+    if (sequenceNumber !== null) {
+        resultDiv.innerHTML += `<br><br>`;  // Add extra space after each sequence
+    }
+}

@@ -1,14 +1,12 @@
-import { getDataFromUI, displayResults } from "./uiUtils.js";
 import { checkMatchingElements } from "./mainAlgorithm.js";
 import { calculateCuttingTimes } from "./calcCut.js";
 
 
 // Calculate cutting time
-export function calculateCuttingTime() {
-    const data = getDataFromUI();
+export function calculateCuttingTime(data) {
     const resultArray = checkMatchingElements(data);
     const finalResult = calculateCuttingTimes(resultArray);
-    displayResults(finalResult);
+    return finalResult;
 }
 
 
