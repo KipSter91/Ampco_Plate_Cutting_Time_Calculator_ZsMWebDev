@@ -1,11 +1,13 @@
+import {formatCuttingTimeSum} from './cuttingTimeManager.js';
+
 // Function to reset the form and reset the row count
-export function resetForm() {
+export function resetForm() {  // Call this function to create the first "Initial piece" row
     document.getElementById('resultSectionFromUi').style.display = 'none';
     const dataRows = document.getElementById("dataRows");
     dataRows.innerHTML = "";  // Clear the table rows
     rowCount = 0;  // Reset row count
-    addNewRow();  // Optionally add the first "Initial piece" row again
-    document.getElementById("result").innerHTML = "";  // Clear the result section
+    document.getElementById("result").innerHTML = "";
+    addNewRow();  // Clear the result section
 }
 
 
@@ -61,26 +63,36 @@ export function generateResultsString(finalResult) {
     finalResult.updatedResultArray.forEach(item => {
         resultString += `Cut ${item.row}: Height = ${item.height} mm, Width = ${item.width} mm, Cutting time = ${item.cuttingTime}\n`;
     });
-    resultString += `\nTotal cutting time: ${finalResult.totalCuttingTime}\n`;
+    resultString += `\nSequence cutting time: ${finalResult.totalCuttingTime}\n`;
     return resultString;
 }
 
 
 // Generic function to display results in the UI (for both UI and PDF input)
-export function displayResultsInUI(finalResult, resultSectionId, resultDivId, sequenceNumber = null) {
+export function displayResultsInUI(finalResult, resultSectionId, resultDivId, sequenceNumber = null, isPDF = false, totalCuttingTime = 0, isLastSequence = false) {
     const resultString = generateResultsString(finalResult);
     document.getElementById(resultSectionId).style.display = 'block';
     const resultDiv = document.getElementById(resultDivId);
 
     // Add sequence number if provided
     if (sequenceNumber !== null) {
-        resultDiv.innerHTML += `<strong>Sequence ${sequenceNumber}:</strong>`;
-        resultDiv.innerHTML += `<br><br>`;  // Add extra space after sequence number
+        resultDiv.innerHTML += `<strong>Sequence ${sequenceNumber}:</strong><br><br>`;
     }
 
-    // Append result and add extra space if sequenceNumber is provided
+    // Append result
     resultDiv.innerHTML += resultString.replace(/\n/g, '<br>');
-    if (sequenceNumber !== null) {
-        resultDiv.innerHTML += `<br><br>`;  // Add extra space after each sequence
+
+    // If it's a PDF and there are multiple sequences, add extra space and a divider
+    if (isPDF && sequenceNumber !== null) {
+        resultDiv.innerHTML += `<br><br>`;  // Extra space after each sequence
+        if (!isLastSequence) {
+            resultDiv.innerHTML += `<hr>`;  // Add separator line between sequences
+        }
+    }
+
+    // If it's the last sequence and PDF, display the total cutting time
+    if (isPDF && isLastSequence) {
+        resultDiv.innerHTML += `<hr><strong>Total Cutting Time: ${formatCuttingTimeSum(totalCuttingTime)}</strong><br><br>`;
+    
     }
 }

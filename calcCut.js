@@ -14,10 +14,13 @@ export function calculateCuttingTimes(resultArray) {
       // Store cutting times for summation later
       cuttingTimes.push(formattedTime);
       return {
-        ...item,
-        cuttingTime: `${formattedTime.minutes} min ${formattedTime.seconds} sec`
+        ...item, // Spread the existing item
+        cuttingTime: `${formattedTime.minutes} min ${formattedTime.seconds} sec` // Add cutting time to the item
       };
     });
-    const totalCuttingTime = sumCuttingTimes(cuttingTimes);
-    return { updatedResultArray, totalCuttingTime };
+
+    console.log(cuttingTimes); // Debugging
+    
+    const totalCuttingTime = sumCuttingTimes(cuttingTimes); // Sum all cutting times
+    return { updatedResultArray, totalCuttingTime }; // Return the updated array and total cutting time
   }

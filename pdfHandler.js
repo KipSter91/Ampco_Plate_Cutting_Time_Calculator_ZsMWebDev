@@ -1,4 +1,4 @@
-import { calculateCuttingTime } from './cuttingTimeManager.js';
+import { calculateCuttingTime, parseCuttingTime } from './cuttingTimeManager.js';
 import { displayResultsInUI } from './uiUtils.js';
 
 
@@ -14,12 +14,11 @@ function checkFileUpload() {
 };
 
 
-// Function to upload the PDF file
 export async function uploadPDF() {
     if (!checkFileUpload()) {
         return;
     }
-    document.getElementById('result1').innerHTML = ""; 
+    document.getElementById('result1').innerHTML = "";
     document.getElementById('resultSectionFromPdf').style.display = 'block';
     const pdfFile = document.getElementById('pdfFile').files[0];
     const formData = new FormData();
@@ -35,10 +34,12 @@ export async function uploadPDF() {
     const data = await response.json();
     console.log("Extracted data:", data);
 
-    // Process each sequence individually and track sequence number
-    let sequenceNumber = 1;  // Start from 1
+    let totalCuttingTime = 0;
+    let sequenceNumber = 1;
 
-    for (const sequence of data.grouped_sequences) {
+    for (let i = 0; i < data.grouped_sequences.length; i++) {
+        const sequence = data.grouped_sequences[i];
+        
         // Format each sequence
         const formattedData = sequence.map(item => ({
             X: item[0],
@@ -50,8 +51,15 @@ export async function uploadPDF() {
         const finalResult = await calculateCuttingTime(formattedData);
         console.log("Final result:", finalResult);
 
-        // Display each sequence's result in the UI and pass the sequence number
-        displayResultsInUI(finalResult, 'resultSectionFromPdf', 'result1', sequenceNumber);
-        sequenceNumber++;  // Increment sequence number for the next sequence
+        // Accumulate total cutting time
+        totalCuttingTime += parseCuttingTime(finalResult.totalCuttingTime);
+        console.log(totalCuttingTime);
+        
+        // Check if it's the last sequence
+        const isLastSequence = (i === data.grouped_sequences.length - 1);
+
+        // Display each sequence's result and pass relevant PDF-specific information
+        displayResultsInUI(finalResult, 'resultSectionFromPdf', 'result1', sequenceNumber, true, totalCuttingTime, isLastSequence);
+        sequenceNumber++;
     }
 }

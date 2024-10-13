@@ -45,6 +45,7 @@ def process_pdf():
     # Process the refined data
     for line in refined_data:
         parts = line.split()
+        print(parts)
         # Check if the line starts with "1", indicating a new sequence
         if parts[0] == "1" and current_group:
             grouped_sequences.append(current_group)  # Add the current group to the list
