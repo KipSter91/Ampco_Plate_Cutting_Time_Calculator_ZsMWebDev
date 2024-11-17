@@ -25,9 +25,9 @@ export async function uploadPDF() {
     formData.append('pdf', pdfFile);
 
     // Send the PDF to the backend for processing
-    const response = await fetch('http://127.0.0.1:5000/process-pdf', {
-        method: 'POST',
-        body: formData
+    const response = await fetch("/process-pdf", {
+        method: "POST",
+        body: formData,
     });
 
     // Get the JSON response from the server
