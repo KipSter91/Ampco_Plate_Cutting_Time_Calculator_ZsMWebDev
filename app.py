@@ -3,6 +3,7 @@ import PyPDF2
 from flask_cors import CORS
 import logging
 import re
+import os
 
 app = Flask(__name__)
 
@@ -106,4 +107,6 @@ def process_pdf():
         return jsonify({"error": "Failed to process PDF"}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+     # Dynamically set the port for Render, fallback to 5000 for local development
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
