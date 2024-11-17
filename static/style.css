@@ -147,19 +147,27 @@ input {
 
 /* Responsive styles for smaller screens (e.g., mobile devices) */
 @media screen and (max-width: 768px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Stack content vertically on mobile */
+  }
+
   .container {
-    width: 100%;
-    max-width: 90%;
-    padding: 10px;
+    width: 100%; /* Full width for small screens */
+    max-width: 90%; /* Maximum 90% of the screen width */
+    padding: 20px 10px; /* Add padding: 20px top/bottom, 10px left/right */
+    margin: 0 auto; /* Center the container horizontally */
   }
 
   h1 {
-    font-size: 24px;
+    font-size: 24px; /* Adjust font size for smaller screens */
   }
 
   label,
   input {
-    margin: 5px auto;
+    margin: 5px auto; /* Center labels and inputs */
   }
 
   button {
@@ -171,7 +179,8 @@ input {
     font-size: 20px;
     margin-top: 10px;
   }
+
   input {
-    width: 90px;
+    width: 90%; /* Make inputs fit within mobile width */
   }
 }
