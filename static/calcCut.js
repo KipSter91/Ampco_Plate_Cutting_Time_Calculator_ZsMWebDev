@@ -1,4 +1,4 @@
-import { getCuttingSpeed } from "./defineParams.js";
+import { getCuttingSpeed } from "../defineParams.js";
 import { formatCuttingTime, sumCuttingTimes } from "./cuttingTimeManager.js";
 
 
