@@ -27,11 +27,35 @@ def serve_static_files(path):
 
 # Function to trim non-numeric or "(number)" parts from the end of a line
 def trim_line(line):
+    logging.debug(f"Before trimming: '{line}'")
+
+    # 1️⃣ If there is an opening parenthesis '(' but no closing ')', add a ')' at the end
+    if '(' in line and ')' not in line:
+        line += ')'
+        logging.debug(f"Added missing closing parenthesis: '{line}'")
+
+    # 2️⃣ Remove trailing parentheses groups (only from the end of the line)
+    while re.search(r'\([\d\s\w\.\-]*\)\s*$', line):  # Matches (xxx) at the end
+        line = re.sub(r'\([\d\s\w\.\-]*\)\s*$', '', line).strip()
+        logging.debug(f"Removed trailing parenthesis group, new line: '{line}'")
+
+    # 3️⃣ Split the cleaned line into words
     parts = line.split()
-    # Remove non-numeric and "(number)" parts from the end until the last three numbers remain
-    while len(parts) > 3 and (re.match(r'\(\d+\)', parts[-1]) or not parts[-1].replace('.', '', 1).isdigit()):
+
+    # 4️⃣ Remove trailing non-numeric elements while ensuring at least 4 elements remain
+    while parts and not parts[-1].replace('.', '', 1).isdigit():
+        logging.debug(f"Removing non-numeric part: {parts[-1]}")
         parts.pop()
-    return ' '.join(parts)
+
+    # 5️⃣ Ensure the line has at least 4 elements (not necessarily all numbers)
+    if len(parts) < 4:
+        logging.debug("Line is too short after trimming, returning empty string.")
+        return ""
+
+    # 6️⃣ Reconstruct the cleaned line
+    final_line = ' '.join(parts)
+    logging.debug(f"Final trimmed line: '{final_line}'")
+    return final_line
 
 # Function to check if the line contains valid data with trimming if needed
 def is_valid_data(line):
